@@ -117,18 +117,16 @@ let getListUsers = () => {
 let createNewUser = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      let hashPassword = await hashUserPassword(data.password);
-
       await db.User.create({
         id: data.id,
         email: data.email,
-        password: hashPassword,
+        password: await hashUserPassword(data.password.trim()),
         firstName: data.firstName,
         lastName: data.lastName,
         roleID: 3,
         image: "cc38cdf86cad599284b94973a9444b65",
         balance: 0,
-        status: 0,
+        status: 1,
       });
 
       resolve("add successfully !");
