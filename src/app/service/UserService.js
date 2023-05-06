@@ -53,6 +53,9 @@ let getUserByEmailAndPassword = (email, password) => {
         where: { email: email },
         raw: true,
       });
+      if(!user){
+        resolve()
+      }
       let comparePassword = await compareUserPass(
         password.trim(),
         user.password
